@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>accordion-custom-element-in-web-component</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+    <body>
+        <style>
+            details[open] {
+                background: #43beac;
+                padding-left: 1em;
+            }
+            details[open] summary {
+                background: #17315a;
+                color: white;
+                margin-left: -1em;
+            }
+        </style>
+        <my-accordion>
+            <details>
+                <summary>Alpha</summary>
+                Amazing!
+            </details>
+            <details open>
+                <summary>Bravo</summary>
+                Note the default open attribute
+            </details>
+            <details>
+                <summary>Charlie</summary>
+                <h3>Cool!</h3>
+                hold Ctrl Key
+            </details>
+            <details>
+                <summary>Delta</summary>
+                <b>D...</b>
+                <hr />
+                The end
+            </details>
+        </my-accordion>
+        <script>
+            customElements.define(
+                "my-accordion",
+                class extends HTMLElement {
+                    connectedCallback() {
+                        this.onclick = (evt) => {
+                            [...this.children].map((detail) => {
+                                !evt.ctrlKey &&
+                                    detail.toggleAttribute(
+                                        "open",
+                                        evt.target == detail
+                                    );
+                            });
+                        };
+                    }
+                }
+            );
+        </script>
+    </body>
+</html>

@@ -1,0 +1,43 @@
+https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details
+https://css-tricks.com/quick-reminder-that-details-summary-is-the-easiest-way-ever-to-make-an-accordion/
+
+https://www.dannymoerkerke.com/blog/web-components-will-replace-your-frontend-framework
+
+class MyElement extends HTMLElement {
+constructor() {
+super();
+} connectedCallback() {
+// here the element has been inserted into the DOM
+}
+}
+
+class MyElement extends HTMLElement {
+static get observedAttributes() {
+return ['foo', 'bar'];
+} attributeChangedCallback(attr, oldVal, newVal) {
+switch(attr) {
+case 'foo':
+// do something with 'foo' attribute
+case 'bar':
+// do something with 'bar' attribute }
+}
+}
+
+The order in which the lifecycle methods are executed is:
+
+constructor -> attributeChangedCallback -> connectedCallback
+
+constructor() {
+this.container = this.shadowRoot.querySelector('#container');
+}attributeChangedCallback(attr, oldVal, newVal) {
+if(attr === 'disabled') {
+if(this.hasAttribute('disabled') {
+this.container.style.background = '#808080';
+}
+else {
+this.container.style.background = '#ffffff';
+}
+}
+}
+
+...
